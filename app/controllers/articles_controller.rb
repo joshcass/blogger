@@ -1,17 +1,43 @@
 class ArticlesController < ApplicationController
-  before_action :article_setup, only: [:show, :new, :edit, :destroy]
+  include ArticlesHelper
+  before_action :article_setup, only: [:show, :edit, :update, :destroy]
 
   def index
-    @articles = Articles.all
+    @articles = Article.all
   end
 
   def show
-
   end
 
-  private
+  def new
+    @article = Article.new
+  end
 
-  def article_setup
-    @article = Article.find(params[:id])
+  def create
+    @article = Article.new article_params
+    if @article.save
+      flash.notice = "Article '#{@article.title}' created!"
+      redirect_to @article
+    else
+      raise "error"
+    end
+  end
+
+  def destroy
+    @article.destroy
+    flash.notice = "Article '#{@article.title}' deleted!"
+    redirect_to articles_path
+  end
+
+  def edit
+  end
+
+  def update
+    if @article.update article_params
+      flash.notice = "Article '#{@article.title}' updated!"
+      redirect_to @article
+    else
+      raise "error"
+    end
   end
 end

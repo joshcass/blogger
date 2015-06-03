@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
-  resources :article
+  resources :articles
+  root to: 'articles#index'
 end
 
