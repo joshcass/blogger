@@ -1,6 +1,6 @@
-<%= form_for(article) do |f| %>
+<%= form_for(@article) do |f| %>
 <ul>
-  <% article.errors.full_messages.each do |err| %>
+  <% @article.errors.full_messages.each do |err| %>
     <li><%= err %></li>
     <% end %>
 </ul>
