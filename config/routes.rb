@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  root to: 'articles#index'
   get 'articles/feed' => 'articles#feed'
   resources :articles do
     resources :comments

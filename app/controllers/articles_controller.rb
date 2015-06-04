@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   include ArticlesHelper
   before_action :article_setup, only: [:show, :edit, :update, :destroy]
-  before_filter :require_login, except: [:index, :show]
+  before_filter :require_login, except: [:index, :show, :feed]
 
   def index
     @articles = Article.all
@@ -42,13 +42,6 @@ class ArticlesController < ApplicationController
       redirect_to @article
     else
       raise "error"
-    end
-  end
-
-  def feed
-   @articles = Article.all
-    respond_to do |format|
-      format.rss {render layout: false}
     end
   end
 end
