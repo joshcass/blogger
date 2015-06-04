@@ -1,12 +1,14 @@
 class ArticlesController < ApplicationController
   include ArticlesHelper
   before_action :article_setup, only: [:show, :edit, :update, :destroy]
+  before_filter :require_login, except: [:index, :show]
 
   def index
     @articles = Article.all
   end
 
   def show
+    @article.increment_view_count
     @comment = Comment.new
     @comment.article_id = @article.id
   end

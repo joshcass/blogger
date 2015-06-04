@@ -1,9 +1,17 @@
 <h1>All Articles</h1>
 
+<h3>Most Popular Articles:</h3>
+<ul id="articles">
+  <% @articles.order(view_count: :desc).limit(3).each do |article| %>
+    <li><%= link_to article.title, article, class: 'article_title', id: "article+#{article.id}" %></li>
+  <% end %>
+</ul>
+<br>
+<h3>All Articles:</h3>
 <ul id ="articles">
   <% @articles.each do |article| %>
     <li><%= link_to article.title, article, class: 'article_title', id: "article_#{article.id}" %></li>
   <% end %>
 </ul>
 
-<%= link_to "Create a New Article", new_article_path, class: 'new_article' %>
+<%= link_to "Create a New Article", new_article_path, class: 'new_article' if logged_in? %>

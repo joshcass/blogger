@@ -1,5 +1,8 @@
 <h1><%= @article.title %></h1>
 <p>
+  Article viewed <%= @article.view_count %> times
+</p>
+<p>
   Tags:
   <% @article.tags.each do |tag| %>
     <%= link_to tag.name, tag %>
@@ -7,13 +10,15 @@
 </p>
 <br>
 <p>
- <%= image_tag @article.image.url, height: "250" if @article.image.exists? %>
+  <%= image_tag @article.image.url, height: "250" if @article.image.exists? %>
 </p>
 <br>
 <p><%= @article.body %></p>
 <br>
-<%= link_to "Edit", [:edit, @article] %><br>
-<%= link_to "Delete", @article, method: :delete, data: {confirm: "Really delete the article?"} %><br>
+<% if logged_in? %>
+  <%= link_to "Edit", [:edit, @article] %><br>
+  <%= link_to "Delete", @article, method: :delete, data: {confirm: "Really delete the article?"} %><br>
+<% end %>
 <br>
 <h3>Comments (<%= @article.comments.size %>)</h3>
 <%= render partial: 'comment', collection: @article.comments %>

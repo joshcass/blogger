@@ -14,4 +14,9 @@ class Article < ActiveRecord::Base
     new_or_found_tags = tag_names.map {|name| Tag.find_or_create_by(name: name)}
     self.tags = new_or_found_tags
   end
+
+  def increment_view_count
+    new_count = self.view_count += 1
+    self.update(view_count: new_count)
+  end
 end

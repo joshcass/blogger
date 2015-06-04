@@ -17,8 +17,8 @@
         <td><%= author.username %></td>
         <td><%= author.email %></td>
         <td><%= link_to 'Show', author %></td>
-        <td><%= link_to 'Edit', edit_author_path(author) %></td>
-        <td><%= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_author_path(author) if logged_in? %></td>
+        <td><%= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' } if logged_in? %></td>
       </tr>
     <% end %>
   </tbody>

@@ -1,7 +1,7 @@
 <h1>All the Tags!</h1>
 <ul id ="tags">
   <% @tags.each do |tag| %>
-    <li><%= link_to tag.name, tag, class: 'tag_name', id: "tag_#{tag.id}" %> <%= link_to "Delete", tag, method: :delete, data: {confirm: "Really delete the tag?"}  %></li>
+    <li><%= link_to tag.name, tag, class: 'tag_name', id: "tag_#{tag.id}" %> <%= link_to "Delete", tag, method: :delete, data: {confirm: "Really delete the tag?"} if logged_in? %></li>
   <% end %>
 </ul>
 <br>
