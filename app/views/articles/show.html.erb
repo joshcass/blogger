@@ -6,6 +6,10 @@
   <% end %>
 </p>
 <br>
+<p>
+ <%= image_tag @article.image.url, height: "250" if @article.image.exists? %>
+</p>
+<br>
 <p><%= @article.body %></p>
 <br>
 <%= link_to "Edit", [:edit, @article] %><br>

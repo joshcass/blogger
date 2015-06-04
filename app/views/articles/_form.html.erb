@@ -1,22 +1,32 @@
-<%= form_for(@article) do |f| %>
-<ul>
-  <% @article.errors.full_messages.each do |err| %>
-    <li><%= err %></li>
+<%= form_for(@article, html: {multipart: true}) do |f| %>
+  <ul>
+    <% @article.errors.full_messages.each do |err| %>
+      <li><%= err %></li>
     <% end %>
-</ul>
-<p>
-  <%= f.label :title %><br>
-  <%= f.text_field :title %>
-</p>
-<p>
-  <%= f.label :body %>
-  <%= f.text_area :body %>
-</p>
+  </ul>
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </p>
   <p>
     <%= f.label :tag_list, "Add tags" %><br>
     <%= f.text_field :tag_list%>
   </p>
-<p>
-  <%= f.submit %>
-</p>
+  <p>
+    <% if @article.image.exists? %>
+      <%= image_tag @article.image.url, height: "100" %><br>
+      <%= f.label :image, "Attach a New Image" %><br>
+      <%= f.file_field :image %>
+    <% else %>
+      <%= f.label :image, "Attach an Image" %><br>
+      <%= f.file_field :image %>
+    <% end %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
 <% end %>
